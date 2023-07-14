@@ -4,7 +4,7 @@
 const Algorithm = new Map(
   [
 
-  ['Bubble-sort', (arr, setswap1, setswap2, setArr, setSorting, cur, setCur) => {
+  ['Bubble-sort', (arr, setswap1, setswap2, setArr, setSorting) => {
     let newArr = [...arr];
     let i = 0;
     let j = i + 1;
@@ -50,7 +50,7 @@ const Algorithm = new Map(
   
 ,  
 
-    ['Selection-sort', (arr,setswap1,setswap2,setArr,setSorting,cur,setCur)=>{
+    ['Selection-sort', (arr,setswap1,setswap2,setArr,setSorting)=>{
             let newArr = [...arr];
             let i = 0;
         
@@ -130,7 +130,7 @@ const Algorithm = new Map(
 
     }],
 
-    ['Mergee-sort', (arr,setswap1,setswap2,setArr,setSorting)=>{
+    ['Merge-sort', (arr,setswap1,setswap2,setArr,setSorting)=>{
         
        const mergeSort = (arr) => {
           if (arr.length <= 1) {
@@ -229,7 +229,7 @@ const Algorithm = new Map(
           
     }],
 
-    ['Shell-sort', (arr,setswap1,setswap2,setArr,setSorting,cur,setCur)=>{
+    ['Shell-sort', (arr,setswap1,setswap2,setArr,setSorting)=>{
         const shellSort = (arr) => {
             const n = arr.length;
             const animations = [];
@@ -353,119 +353,6 @@ const Algorithm = new Map(
   
 }]
 ,
-
-['preCompute', (arr, setswap1, setswap2, setArr, setSorting,animationFrames,
-   setAnimationFrames,cntrl,setcntrl,sorting) => {
-
-  const preCompute = () => {
-    if (cntrl && sorting===false) { 
-      const mergeSort = (arr) => {
-        // Precompute the frames
-        const animations = [];
-        const sortedArr = arr.slice();
-        divide(sortedArr, 0, sortedArr.length - 1, animations);
-        return animations;
-      };
-
-      const divide = (arr, start, end, animations) => {
-        if (start < end) {
-          const mid = Math.floor((start + end) / 2);
-          divide(arr, start, mid, animations);
-          divide(arr, mid + 1, end, animations);
-          merge(arr, start, mid, end, animations);
-        }
-      };
-
-      const merge = (arr, start, mid, end, animations) => {
-        const leftArr = arr.slice(start, mid + 1);
-        const rightArr = arr.slice(mid + 1, end + 1);
-        let i = 0;
-        let j = 0;
-        let k = start;
-
-        while (i < leftArr.length && j < rightArr.length) {
-          animations.push({ type: 'compare', indices: [k, start + i, mid + 1 + j] });
-
-          if (leftArr[i] <= rightArr[j]) {
-            arr[k] = leftArr[i];
-            animations.push({ type: 'overwrite', index: k, value: leftArr[i] });
-            i++;
-          } else {
-            arr[k] = rightArr[j];
-            animations.push({ type: 'overwrite', index: k, value: rightArr[j] });
-            j++;
-          }
-
-          k++;
-        }
-
-        while (i < leftArr.length) {
-          arr[k] = leftArr[i];
-          animations.push({ type: 'overwrite', index: k, value: leftArr[i] });
-          i++;
-          k++;
-        }
-
-        while (j < rightArr.length) {
-          arr[k] = rightArr[j];
-          animations.push({ type: 'overwrite', index: k, value: rightArr[j] });
-          j++;
-          k++;
-        }
-      };
-
-      const frames = mergeSort(arr);
-      setAnimationFrames(frames);
-      setcntrl(false);
-    } 
-    else if(sorting && cntrl===false) {
-      // Animation playback
-      const animateMergeSort = () => {
-        let currentAnimation = 0;
-
-        const animate = () => {
-          if (currentAnimation < animationFrames.length) {
-            const { type, indices, index, value } = animationFrames[currentAnimation];
-
-            if (type === 'compare') {
-              const [k, i, j] = indices;
-              setswap1(i);
-              setswap2(j);
-            } else if (type === 'overwrite') {
-              setArr((arr) => {
-                const newArr = [...arr];
-                newArr[index] = value;
-                return newArr;
-              });
-            }
-
-            currentAnimation++;
-            requestAnimationFrame(animate);
-          } else {
-            setswap1(0);
-            setswap2(0);
-            setSorting(false);
-            setAnimationFrames([]);
-          }
-        };
-
-        animate();
-      };
-
-      animateMergeSort();
-      setcntrl(true);
-    }
-    
-  };
-
-  preCompute();
-
-}],
-
-
-
-
-
 
 ]);
 export default Algorithm;

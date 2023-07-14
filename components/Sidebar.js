@@ -52,7 +52,7 @@ import { useColorMode } from "@chakra-ui/react";
                     <option value="Bubble-sort">Bubble-sort</option>
                     <option value="Selection-sort">Selection-sort</option>
                     <option value="Insertion-sort">Insertion-sort</option>
-                    <option value="Mergee-sort">Merge-sort</option>
+                    <option value="Merge-sort">Merge-sort</option>
                     <option value="Quick-sort">Quick-sort</option>
                     <option value="Shell-sort">Shell-sort</option>
                 </Select>
@@ -71,7 +71,7 @@ import { useColorMode } from "@chakra-ui/react";
                     <option value="Bubble-sort">Bubble-sort</option>
                     <option value="Selection-sort">Selection-sort</option>
                     <option value="Insertion-sort">Insertion-sort</option>
-                    <option value="Mergee-sort">Merge-sort</option>
+                    <option value="Merge-sort">Merge-sort</option>
                     <option value="Quick-sort">Quick-sort</option>
                     <option value="Shell-sort">Shell-sort</option>
                 </Select>

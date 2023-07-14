@@ -3,27 +3,27 @@ import React,{useState,useEffect} from "react";
 import Algorithm from '../pages/Algorithm';
  
 const BuildGrid = ({ data ,s1 ,s2, setSorting, setswap1, setswap2, setArr,
-   algo, sorting, rendering, setRendering, cur, cntrl ,setcntrl,
-   setCur,animationFrames, setAnimationFrames}) => {
+   algo, sorting, rendering, setRendering,}) => {
     const { colorMode } = useColorMode();
     const clr = colorMode === "dark" ? "black" : "gray.100";
 
   const run =()=>{
-      Algorithm.get(algo)(data,setswap1,setswap2,setArr,setSorting,cur,setCur);
+      Algorithm.get(algo)(data,setswap1,setswap2,setArr,setSorting);
    }
-  
-  if(rendering && sorting){
-    useEffect(()=>{
-      setRendering(false);
-    },[rendering])
-    console.log('srt',sorting);
-    console.log('redr',rendering);
-    run();
-  }
-  if(sorting===false){
-      setRendering(true)
-  }
 
+  useEffect(() => {
+    if (rendering && sorting) {
+      setRendering(false);
+      run();
+    }
+  }, [rendering, sorting]);
+  
+  useEffect(() => {
+    if (!sorting) {
+      setRendering(true);
+    }
+  }, [sorting]);
+ 
 
   return (
    <Flex height={'30vh'} mb={18}>

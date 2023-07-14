@@ -1,9 +1,7 @@
 import { useColorMode, Button} from "@chakra-ui/react";
 import { MoonIcon,SunIcon} from '@chakra-ui/icons';
 
-import React from 'react'
-
-const toggler = () => {
+const Toggler = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
@@ -16,4 +14,4 @@ const toggler = () => {
   )
 };
 
-export default toggler
+export default Toggler;

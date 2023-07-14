@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex ,Box,Spacer, Heading} from '@chakra-ui/react';
-import Toggler from '../pages/toggler';
+import Toggler from '../pages/Toggler';
 
 const Header = () => {
   return (
