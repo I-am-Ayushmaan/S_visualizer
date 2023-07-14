@@ -48,6 +48,7 @@ const BuildGrid = ({ data ,s1 ,s2, setSorting, setswap1, setswap2, setArr,
             justifyContent="flex-end"
             textAlign="center"
             flexDirection="column"
+            key={ind}
           >
             
             {/* <p>{d}</p> */}
