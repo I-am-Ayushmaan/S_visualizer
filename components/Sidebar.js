@@ -1,11 +1,10 @@
 
 import {
     Box,Button,Flex,FormControl,
-    FormLabel,HStack,Select,Slider,
+    FormLabel,Stack,Select,Slider,
     SliderFilledTrack,SliderThumb,
     SliderTrack } from "@chakra-ui/react";
 
-import React, { useEffect, useState } from "react";
 import { useColorMode } from "@chakra-ui/react";
 
 
@@ -18,9 +17,9 @@ import { useColorMode } from "@chakra-ui/react";
    
     return (
 
-      <HStack minW="xs" p={"4"} borderRadius="lg" rounded={'md'}
+      <Stack minW="xs" p={"4"} borderRadius="lg" rounded={'md'}
            bg={clr} borderWidth={"1px"} borderColor={"blue.500"}
-           overflow="hidden" m={4} >
+           overflow="hidden" m={4} direction={['column', 'row']}>
 
             <FormControl>
                 <FormLabel htmlFor="size">{`Array Size (${formState.size})`}</FormLabel>
@@ -102,7 +101,7 @@ import { useColorMode } from "@chakra-ui/react";
                 </Button>
             </Flex>
 
-      </HStack>
+      </Stack>
     );
   };
   export default Sidebar;

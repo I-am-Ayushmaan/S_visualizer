@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <>
      <Flex m={4} mt={8}>
-        <Box  boxShadow={'dark-lg'} p={6}  rounded={'md'}
+        <Box  boxShadow={'dark-lg'} p={4}  rounded={'md'}
               borderWidth={"1px"} borderColor={"blue.500"} 
               _focus={{ boxShadow: "outline" }}
         >

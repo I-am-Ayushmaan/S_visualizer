@@ -1,4 +1,4 @@
-import { useState} from "react";
+
 
 
 const Algorithm = new Map(
@@ -132,107 +132,103 @@ const Algorithm = new Map(
 
     ['Mergee-sort', (arr,setswap1,setswap2,setArr,setSorting)=>{
         
-        const mergeSort = (arr) => {
-            if (arr.length <= 1) {
-              return arr;
-            }
-          
-            const animations = [];
-            const sortedArr = arr.slice();
-          
-            divide(sortedArr, 0, sortedArr.length - 1, animations);
-          
-            animateMergeSort(animations);
-          
-            return sortedArr;
-          };
-          
-          const divide = (arr, start, end, animations) => {
-            if (start < end) {
-              const mid = Math.floor((start + end) / 2);
-              divide(arr, start, mid, animations);
-              divide(arr, mid + 1, end, animations);
-              merge(arr, start, mid, end, animations);
-            }
-          };
-          
-          const merge = (arr, start, mid, end, animations) => {
-            const leftArr = arr.slice(start, mid + 1);
-            const rightArr = arr.slice(mid + 1, end + 1);
-            let i = 0;
-            let j = 0;
-            let k = start;
-          
-            while (i < leftArr.length && j < rightArr.length) {
-              animations.push({ type: 'compare', indices: [k, start + i, mid + 1 + j] });
-          
-              if (leftArr[i] <= rightArr[j]) {
-                arr[k] = leftArr[i];
-                animations.push({ type: 'overwrite', index: k, value: leftArr[i] });
-                i++;
-              } else {
-                arr[k] = rightArr[j];
-                animations.push({ type: 'overwrite', index: k, value: rightArr[j] });
-                j++;
-              }
-          
-              k++;
-            }
-          
-            while (i < leftArr.length) {
+       const mergeSort = (arr) => {
+          if (arr.length <= 1) {
+            return arr;
+          }
+        
+          const animations = [];
+          const sortedArr = arr.slice();
+        
+          divide(sortedArr, 0, sortedArr.length - 1, animations);
+        
+          animateMergeSort(animations);
+        
+          return sortedArr;
+        };
+        
+        const divide = (arr, start, end, animations) => {
+          if (start < end) {
+            const mid = Math.floor((start + end) / 2);
+            divide(arr, start, mid, animations);
+            divide(arr, mid + 1, end, animations);
+            merge(arr, start, mid, end, animations);
+          }
+        };
+        
+        const merge = (arr, start, mid, end, animations) => {
+          const leftArr = arr.slice(start, mid + 1);
+          const rightArr = arr.slice(mid + 1, end + 1);
+          let i = 0;
+          let j = 0;
+          let k = start;
+        
+          while (i < leftArr.length && j < rightArr.length) {
+            animations.push({ type: 'compare', indices: [k, start + i, mid + 1 + j] });
+        
+            if (leftArr[i] <= rightArr[j]) {
               arr[k] = leftArr[i];
               animations.push({ type: 'overwrite', index: k, value: leftArr[i] });
               i++;
-              k++;
-            }
-          
-            while (j < rightArr.length) {
+            } else {
               arr[k] = rightArr[j];
               animations.push({ type: 'overwrite', index: k, value: rightArr[j] });
               j++;
-              k++;
+            }
+        
+            k++;
+          }
+        
+          while (i < leftArr.length) {
+            arr[k] = leftArr[i];
+            animations.push({ type: 'overwrite', index: k, value: leftArr[i] });
+            i++;
+            k++;
+          }
+        
+          while (j < rightArr.length) {
+            arr[k] = rightArr[j];
+            animations.push({ type: 'overwrite', index: k, value: rightArr[j] });
+            j++;
+            k++;
+          }
+        };
+        
+        const animateMergeSort = (animations) => {
+          let currentAnimation = 0;
+        
+          const animate = () => {
+            if (currentAnimation < animations.length) {
+              const { type, indices, index, value } = animations[currentAnimation];
+        
+              if (type === 'compare') {
+                const [k, i, j] = indices;
+                setswap1(i);
+                setswap2(j);
+              } else if (type === 'overwrite') {
+                setArr((arr) => {
+                  const newArr = [...arr];
+                  newArr[index] = value;
+                  return newArr;
+                });
+              }
+        
+              currentAnimation++;
+              requestAnimationFrame(animate);
+            } else {
+              setswap1(0);
+              setswap2(0);
+              setSorting(false);
             }
           };
+        
+          requestAnimationFrame(animate);
+        };
+        
+        mergeSort(arr); 
           
-          const animateMergeSort = (animations) => {
-            let currentAnimation = 0;
-          
-            const animate = () => {
-              if (currentAnimation < animations.length) {
-                const { type, indices, index, value } = animations[currentAnimation];
-          
-                if (type === 'compare') {
-                  const [k, i, j] = indices;
-                  setswap1(i);
-                  setswap2(j);
-                } else if (type === 'overwrite') {
-                  setArr((arr) => {
-                    const newArr = [...arr];
-                    newArr[index] = value;
-                    return newArr;
-                  });
-                }
-          
-                currentAnimation++;
-                requestAnimationFrame(animate);
-              } else {
-                setswap1(0);
-                setswap2(0);
-                setSorting(false);
-              }
-            };
-          
-            requestAnimationFrame(animate);
-          };
-          
-          mergeSort(arr); 
-          
-    }]
-    
-    
-    ,
+    }],
 
-    
     ['Shell-sort', (arr,setswap1,setswap2,setArr,setSorting,cur,setCur)=>{
         const shellSort = (arr) => {
             const n = arr.length;
@@ -300,8 +296,7 @@ const Algorithm = new Map(
             requestAnimationFrame(animate);
           };
           
-          shellSort(arr);
-          
+          shellSort(arr);   
     }],
 
 
@@ -314,7 +309,6 @@ const Algorithm = new Map(
       setSorting(false);
       return;
     }
-
     let pivotIndex = await partition(start, end);
     requestAnimationFrame(() => {
       quickSort(start, pivotIndex - 1);
@@ -336,7 +330,7 @@ const Algorithm = new Map(
           setswap2(j);
           setArr([...arr]);
           resolve();
-        }, 10); // Adjust the delay time as needed (e.g., 10 milliseconds)
+        }, 10); // Adjust the delay time 
       });
     };
 
@@ -356,114 +350,15 @@ const Algorithm = new Map(
   };
 
   quickSort(0, arr.length - 1);
-
-
-  // const mergeSort = (arr) => {
-  //   if (arr.length <= 1) {
-  //     return arr;
-  //   }
-  
-  //   const animations = [];
-  //   const sortedArr = arr.slice();
-  
-  //   divide(sortedArr, 0, sortedArr.length - 1, animations);
-  
-  //   animateMergeSort(animations);
-  
-  //   return sortedArr;
-  // };
-  
-  // const divide = (arr, start, end, animations) => {
-  //   if (start < end) {
-  //     const mid = Math.floor((start + end) / 2);
-  //     divide(arr, start, mid, animations);
-  //     divide(arr, mid + 1, end, animations);
-  //     merge(arr, start, mid, end, animations);
-  //   }
-  // };
-  
-  // const merge = (arr, start, mid, end, animations) => {
-  //   const leftArr = arr.slice(start, mid + 1);
-  //   const rightArr = arr.slice(mid + 1, end + 1);
-  //   let i = 0;
-  //   let j = 0;
-  //   let k = start;
-  
-  //   while (i < leftArr.length && j < rightArr.length) {
-  //     animations.push({ type: 'compare', indices: [k, start + i, mid + 1 + j] });
-  
-  //     if (leftArr[i] <= rightArr[j]) {
-  //       arr[k] = leftArr[i];
-  //       animations.push({ type: 'overwrite', index: k, value: leftArr[i] });
-  //       i++;
-  //     } else {
-  //       arr[k] = rightArr[j];
-  //       animations.push({ type: 'overwrite', index: k, value: rightArr[j] });
-  //       j++;
-  //     }
-  
-  //     k++;
-  //   }
-  
-  //   while (i < leftArr.length) {
-  //     arr[k] = leftArr[i];
-  //     animations.push({ type: 'overwrite', index: k, value: leftArr[i] });
-  //     i++;
-  //     k++;
-  //   }
-  
-  //   while (j < rightArr.length) {
-  //     arr[k] = rightArr[j];
-  //     animations.push({ type: 'overwrite', index: k, value: rightArr[j] });
-  //     j++;
-  //     k++;
-  //   }
-  // };
-  
-  // const animateMergeSort = (animations) => {
-  //   let currentAnimation = 0;
-  
-  //   const animate = () => {
-  //     if (currentAnimation < animations.length) {
-  //       const { type, indices, index, value } = animations[currentAnimation];
-  
-  //       if (type === 'compare') {
-  //         const [k, i, j] = indices;
-  //         setswap1(i);
-  //         setswap2(j);
-  //       } else if (type === 'overwrite') {
-  //         setArr((arr) => {
-  //           const newArr = [...arr];
-  //           newArr[index] = value;
-  //           return newArr;
-  //         });
-  //       }
-  
-  //       currentAnimation++;
-  //       requestAnimationFrame(animate);
-  //     } else {
-  //       setswap1(0);
-  //       setswap2(0);
-  //       setSorting(false);
-  //     }
-  //   };
-  
-  //   requestAnimationFrame(animate);
-  // };
-  
-  // mergeSort(arr); 
   
 }]
-
-
-
 ,
 
 ['preCompute', (arr, setswap1, setswap2, setArr, setSorting,animationFrames,
    setAnimationFrames,cntrl,setcntrl,sorting) => {
 
   const preCompute = () => {
-    if (sorting && cntrl) { 
+    if (cntrl && sorting===false) { 
       const mergeSort = (arr) => {
         // Precompute the frames
         const animations = [];
@@ -523,7 +418,7 @@ const Algorithm = new Map(
       setAnimationFrames(frames);
       setcntrl(false);
     } 
-    else {
+    else if(sorting && cntrl===false) {
       // Animation playback
       const animateMergeSort = () => {
         let currentAnimation = 0;
@@ -573,5 +468,4 @@ const Algorithm = new Map(
 
 
 ]);
-
 export default Algorithm;

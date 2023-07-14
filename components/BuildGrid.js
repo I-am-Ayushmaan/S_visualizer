@@ -9,27 +9,8 @@ const BuildGrid = ({ data ,s1 ,s2, setSorting, setswap1, setswap2, setArr,
     const clr = colorMode === "dark" ? "black" : "gray.100";
 
   const run =()=>{
-    if(algo==='Mergee-sort'){
-      Algorithm.get('preCompute')(data,setswap1,setswap2,setArr,setSorting,
-        animationFrames,setAnimationFrames,cntrl,setcntrl,sorting);
-    }
-    else{
       Algorithm.get(algo)(data,setswap1,setswap2,setArr,setSorting,cur,setCur);
-    } 
    }
-
-   const preComp=()=>{
-    
-   }
-  if(cntrl && sorting){
-    if(algo==='Mergee-sort'){
-      Algorithm.get('preCompute')(data,setswap1,setswap2,setArr,setSorting,
-        animationFrames,setAnimationFrames,cntrl,setcntrl,sorting);
-    }
-    // useEffect(()=>{
-    //   setcntrl(false);
-    // },[cntrl])
-  }
   
   if(rendering && sorting){
     useEffect(()=>{
@@ -37,15 +18,12 @@ const BuildGrid = ({ data ,s1 ,s2, setSorting, setswap1, setswap2, setArr,
     },[rendering])
     console.log('srt',sorting);
     console.log('redr',rendering);
-    // preComp();
     run();
   }
   if(sorting===false){
       setRendering(true)
   }
 
-
-    
 
   return (
    <Flex height={'30vh'} mb={18}>

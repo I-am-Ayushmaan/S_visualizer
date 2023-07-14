@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import BuildGrid from '@/components/BuildGrid';
-import {Flex, Box, VStack, Divider } from "@chakra-ui/react";
-import Algorithm from '../pages/Algorithm';
+import { VStack } from "@chakra-ui/react";
 
 
 
@@ -70,11 +69,10 @@ const Visualizer = () => {
     setSorting_b(true)
   };
   useEffect(()=>{
-    console.log('updt',sorting_a)
-    console.log('render',rendering_a)
-    console.log('cntr',control_a)
+    console.log('srtng_a',sorting_a)
+    console.log('render_a',rendering_a)
+    console.log('cntrl_a',control_a)
   },[sorting_a,sorting_b]);
-  // ,animationFrames_a,animationFrames_b
 
 
   return (
