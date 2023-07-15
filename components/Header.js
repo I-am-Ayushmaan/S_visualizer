@@ -6,14 +6,14 @@ const Header = () => {
   return (
     <>
      <Flex m={4} mt={8}>
-        <Box  boxShadow={'dark-lg'} p={4}  rounded={'md'}
+        <Box  boxShadow={'dark-lg'} p={2}  rounded={'md'}
               borderWidth={"1px"} borderColor={"blue.500"} 
               _focus={{ boxShadow: "outline" }}
         >
-          <Heading color={'teal.300'}>S-Visualizer</Heading>
+          <Heading fontSize={40} color={'teal.300'}>S-Visualizer</Heading>
         </Box>
         <Spacer />
-        <Box p={4} >
+        <Box p={2} >
           <Toggler/>
         </Box>
       </Flex>

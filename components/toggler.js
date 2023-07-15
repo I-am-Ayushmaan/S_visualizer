@@ -7,7 +7,7 @@ const Toggler = () => {
     <>
   
         <Button onClick={toggleColorMode} size='lg'>
-         {colorMode === 'light' ? <SunIcon boxSize={8} color={'teal.300'}  /> : <MoonIcon boxSize={8} color={'teal.300'}/>}
+         {colorMode === 'light' ? <SunIcon boxSize={6} color={'teal.300'}  /> : <MoonIcon boxSize={8} color={'teal.300'}/>}
         </Button>
     
     </>

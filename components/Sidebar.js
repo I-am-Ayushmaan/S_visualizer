@@ -6,6 +6,8 @@ import {
     SliderTrack } from "@chakra-ui/react";
 
 import { useColorMode } from "@chakra-ui/react";
+import { useBreakpointValue } from "@chakra-ui/react";
+
 
 
 
@@ -13,6 +15,7 @@ import { useColorMode } from "@chakra-ui/react";
     const { colorMode } = useColorMode();
     const clr = colorMode === "dark" ? "black" : "gray.100";
     const sClr = colorMode === "dark" ? "gray.900" : "white";
+    const maxSliderValue = useBreakpointValue({ base: 60, md: 200 });
 
    
     return (
@@ -27,7 +30,7 @@ import { useColorMode } from "@chakra-ui/react";
                     onChangeEnd={(v) => setFormState({ ...formState, size: v })}
                     aria-label={"10"}
                     min={10}
-                    max={200}
+                    max={maxSliderValue}
                     defaultValue={10}
                     isDisabled={sorting_a || sorting_b}
                 >
