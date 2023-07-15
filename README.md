@@ -1,4 +1,4 @@
-This is a [Next.js]. For UI development I used ChakraUI.
+This is a [Next.js] app. For UI development I used ChakraUI.
 
 ## Description 
 Sorting Visualizer App where you can Visualize two sorting Algorithms running side by side on the same Screen.
