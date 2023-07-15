@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import Sidebar from '../components/Sidebar'
-import Header from '../components/Header'
+import Sidebar from './Sidebar'
+import Header from './Header'
 import BuildGrid from '@/components/BuildGrid';
 import { VStack } from "@chakra-ui/react";
 

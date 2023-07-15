@@ -3,7 +3,7 @@
 
 import { ChakraProvider} from "@chakra-ui/react";
 
-import Visualizer from "./Visualizer";
+import Visualizer from "../components/Visualizer";
 
 export default function Home() {
   return (

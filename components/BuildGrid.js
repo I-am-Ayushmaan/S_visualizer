@@ -1,6 +1,6 @@
 import { Box,useColorMode ,Flex } from "@chakra-ui/react";
 import React,{useState,useEffect} from "react";
-import Algorithm from '../pages/Algorithm';
+import Algorithm from '../utils/Algorithm';
  
 const BuildGrid = ({ data ,s1 ,s2, setSorting, setswap1, setswap2, setArr,
    algo, sorting, rendering, setRendering,}) => {
