@@ -7,22 +7,28 @@ const BuildGrid = ({ data ,s1 ,s2, setSorting, setswap1, setswap2, setArr,
     const { colorMode } = useColorMode();
     const clr = colorMode === "dark" ? "black" : "gray.100";
 
-  const run =()=>{
-      Algorithm.get(algo)(data,setswap1,setswap2,setArr,setSorting);
-   }
 
+  const run = () => {
+    Algorithm.get(algo)(data, setswap1, setswap2, setArr, setSorting);
+  };
+  
   useEffect(() => {
-    if (rendering && sorting) {
+    const handleRun = () => {
       setRendering(false);
       run();
+    };
+  
+    if (rendering && sorting) {
+      handleRun();
     }
-  }, [rendering, sorting]);
+  }, [rendering, sorting, run, setRendering, setswap1, setswap2, setArr, setSorting]);
   
   useEffect(() => {
     if (!sorting) {
       setRendering(true);
     }
-  }, [sorting]);
+  }, [sorting, setRendering]);
+  
  
 
   return (
