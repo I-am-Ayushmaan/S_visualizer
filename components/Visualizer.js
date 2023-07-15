@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Sidebar from './Sidebar'
 import Header from './Header'
 import BuildGrid from '@/components/BuildGrid';
-import { VStack } from "@chakra-ui/react";
+import { VStack,Box } from "@chakra-ui/react";
 
 
 
@@ -39,7 +39,7 @@ const Visualizer = () => {
     setTimeout(() => {
       let newArr = [];
       while (newArr.length <= formState.size) {
-      let random = Math.floor(Math.random() * (250 - 10) + 10);
+      let random = Math.floor(Math.random() * (200 - 10) + 10);
         if (newArr.indexOf(random) === -1) {
           newArr.push(random);
         }
@@ -62,6 +62,7 @@ const Visualizer = () => {
 
   return (
     <> 
+    <Box>
      <Header/>
       <VStack width={"100%"} alignItems={"stretch"}>
         <Sidebar
@@ -82,7 +83,8 @@ const Visualizer = () => {
           setRendering={setRendering_b}/>
 
      </VStack>
- 
+     
+    </Box>
     </>
   )
 };

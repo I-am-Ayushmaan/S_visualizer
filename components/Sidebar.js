@@ -1,14 +1,12 @@
 
 import {
-    Box,Button,Flex,FormControl,
+    Button,Flex,FormControl,
     FormLabel,Stack,Select,Slider,
     SliderFilledTrack,SliderThumb,
     SliderTrack } from "@chakra-ui/react";
 
 import { useColorMode } from "@chakra-ui/react";
 import { useBreakpointValue } from "@chakra-ui/react";
-
-
 
 
   const Sidebar = ({ generateArr, sort, sorting_a,sorting_b, formState, setFormState }) => {
@@ -22,7 +20,7 @@ import { useBreakpointValue } from "@chakra-ui/react";
 
       <Stack minW="xs" p={"4"} borderRadius="lg" rounded={'md'}
            bg={clr} borderWidth={"1px"} borderColor={"blue.500"}
-           overflow="hidden" m={4} direction={['column', 'row']}>
+           overflow="hidden" mt={4} ml={4} mr={4} direction={['column', 'row']}>
 
             <FormControl>
                 <FormLabel htmlFor="size">{`Array Size (${formState.size})`}</FormLabel>

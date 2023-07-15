@@ -1,16 +1,25 @@
 import React from 'react';
 import { Flex ,Box,Spacer, Heading} from '@chakra-ui/react';
 import Toggler from './toggler';
+import { useBreakpointValue } from "@chakra-ui/react";
 
 const Header = () => {
+  const headingSizes = {
+    base: "md",
+    md: "xl",
+    lg: "2xl",
+    xl: "3xl",
+  };
+  const headingSizeValue = useBreakpointValue(headingSizes);
+
   return (
     <>
      <Flex m={4} mt={8}>
-        <Box  boxShadow={'dark-lg'} p={2}  rounded={'md'}
+        <Box  boxShadow={'dark-lg'} p={2} rounded={'md'}
               borderWidth={"1px"} borderColor={"blue.500"} 
               _focus={{ boxShadow: "outline" }}
         >
-          <Heading fontSize={40} color={'teal.300'}>S-Visualizer</Heading>
+          <Heading size={headingSizeValue} color={'teal.300'}>S-Visualizer</Heading>
         </Box>
         <Spacer />
         <Box p={2} >

@@ -32,7 +32,7 @@ const BuildGrid = ({ data ,s1 ,s2, setSorting, setswap1, setswap2, setArr,
  
 
   return (
-   <Flex height={'28vh'} mb={18}>
+   <Flex height={'28vh'} mb={18} >
     <Box
       rounded={"lg"}
       display="grid"
@@ -42,7 +42,7 @@ const BuildGrid = ({ data ,s1 ,s2, setSorting, setswap1, setswap2, setArr,
       borderWidth={"1px"} 
       borderColor={"blue.500"}
       minH={"full"}
-      overflow={"auto"}
+      overflow={"hidden"}
       m={4}
       flex="1"
     >
