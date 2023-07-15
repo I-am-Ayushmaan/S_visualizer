@@ -3,51 +3,44 @@
 
 const Algorithm = new Map(
   [
-
-  ['Bubble-sort', (arr, setswap1, setswap2, setArr, setSorting) => {
-    let newArr = [...arr];
-    let i = 0;
-    let j = i + 1;
-    let animationFrameId = null;
-  
-    const swap = () => {
-      if (i < arr.length - 1) {
-        if (j < arr.length) {
-          if (cur !== j) {
-            setCur(j);
+    ['Bubble-sort', (arr, setswap1, setswap2, setArr, setSorting) => {
+      let newArr = [...arr];
+      let i = 0;
+      let j = i + 1;
+      let animationFrameId = null;
+    
+      const swap = () => {
+        if (i < newArr.length - 1) {
+          if (j < newArr.length) {
+            if (newArr[i] > newArr[j]) {
+              let temp = newArr[i];
+              newArr[i] = newArr[j];
+              newArr[j] = temp;
+    
+              setswap1(i);
+              setswap2(j);
+            }
+    
+            j++;
+          } else {
+            i++;
+            j = i + 1;
           }
-  
-          if (newArr[i] > newArr[j]) {
-            let temp = newArr[i];
-            newArr[i] = newArr[j];
-            newArr[j] = temp;
-  
-            setswap1(i);
-            setswap2(j);
-          }
-  
-          j++;
         } else {
-          i++;
-          j = i + 1;
+          setswap1(0);
+          setswap2(0);
+          setArr(newArr);
+          setSorting(false);
+          cancelAnimationFrame(animationFrameId);
+          return;
         }
-      } else {
-        setswap1(0);
-        setswap2(0);
-        setCur(0);
-        setArr(newArr);
-        setSorting(false);
-        cancelAnimationFrame(animationFrameId);
-        return;
-      }
-  
+    
+        animationFrameId = requestAnimationFrame(swap);
+        setArr([...newArr]);
+      };
+    
       animationFrameId = requestAnimationFrame(swap);
-      setArr([...newArr]);
-    };
-  
-    animationFrameId = requestAnimationFrame(swap);
-  }]
-  
+    }]
 ,  
 
     ['Selection-sort', (arr,setswap1,setswap2,setArr,setSorting)=>{
@@ -229,76 +222,86 @@ const Algorithm = new Map(
           
     }],
 
-    ['Shell-sort', (arr,setswap1,setswap2,setArr,setSorting)=>{
-        const shellSort = (arr) => {
-            const n = arr.length;
-            const animations = [];
-            const sortedArr = [...arr];
-          
-            let gap = Math.floor(n / 2);
-            while (gap > 0) {
-              for (let i = gap; i < n; i++) {
-                const temp = sortedArr[i];
-                let j = i;
-          
-                while (j >= gap && sortedArr[j - gap] > temp) {
-                  animations.push({ type: 'compare', indices: [j - gap, j] });
-          
-                  sortedArr[j] = sortedArr[j - gap];
-                  animations.push({ type: 'swap', indices: [j - gap, j], values: [sortedArr[j], sortedArr[j - gap]] });
-          
-                  j -= gap;
-                }
-          
-                sortedArr[j] = temp;
-              }
-          
-              gap = Math.floor(gap / 2);
-            }
-          
-            animateShellSort(animations);
-          
-            return sortedArr;
-          };
-          
-          const animateShellSort = (animations) => {
-            let currentAnimation = 0;
-          
-            const animate = () => {
-              if (currentAnimation < animations.length) {
-                const { type, indices, values } = animations[currentAnimation];
-          
-                if (type === 'compare') {
-                  const [i, j] = indices;
-                  setswap1(i);
-                  setswap2(j);
-                } else if (type === 'swap') {
-                  const [i, j] = indices;
-                  const [value1, value2] = values;
-                  setArr((arr) => {
-                    const newArr = [...arr];
-                    newArr[i] = value2;
-                    newArr[j] = value1;
-                    return newArr;
-                  });
-                }
-          
-                currentAnimation++;
-                requestAnimationFrame(animate);
-              } else {
-                setswap1(0);
-                setswap2(0);
-                setArr((arr) => [...arr]);
-                setSorting(false);
-              }
-            };
-          
-            requestAnimationFrame(animate);
-          };
-          
-          shellSort(arr);   
-    }],
 
+    ['Shell-sort', (arr, setswap1, setswap2, setArr, setSorting) => {
+      const shellSort = (arr) => {
+        const n = arr.length;
+        const animations = [];
+        const sortedArr = [...arr];
+    
+        let gap = Math.floor(n / 2);
+        while (gap > 0) {
+          for (let i = gap; i < n; i++) {
+            const temp = sortedArr[i];
+            let j = i;
+    
+            while (j >= gap && sortedArr[j - gap] > temp) {
+              animations.push({ type: 'compare', indices: [j - gap, j] });
+    
+              sortedArr[j] = sortedArr[j - gap];
+              animations.push({
+                type: 'swap',
+                indices: [j - gap, j],
+                values: [sortedArr[j], sortedArr[j - gap]],
+              });
+    
+              j -= gap;
+            }
+    
+            sortedArr[j] = temp;
+          }
+    
+          gap = Math.floor(gap / 2);
+        }
+    
+        return { sortedArr, animations };
+      };
+    
+      const animateShellSort = (animations) => {
+        const totalAnimations = animations.length;
+        let currentAnimation = 0;
+    
+        const animate = () => {
+          if (currentAnimation < totalAnimations) {
+            const { type, indices, values } = animations[currentAnimation];
+    
+            if (type === 'compare') {
+              const [i, j] = indices;
+              setswap1(i);
+              setswap2(j);
+            } else if (type === 'swap') {
+              const [i, j] = indices;
+              const [value1, value2] = values;
+              setArr((arr) => {
+                const newArr = [...arr];
+                newArr[i] = value2;
+                newArr[j] = value1;
+                return newArr;
+              });
+            }
+    
+            currentAnimation++;
+          }
+    
+          if (currentAnimation < totalAnimations) {
+            requestAnimationFrame(animate);
+          } else {
+            setswap1(0);
+            setswap2(0);
+            setArr(sortedArr);
+            setSorting(false);
+          }
+        };
+    
+        animate();
+      };
+    
+      const { sortedArr, animations } = shellSort(arr);
+      animateShellSort(animations);
+    }]
+    
+    
+,
 
 ['Quick-sort', (arr, setswap1, setswap2, setArr, setSorting) => {
   const quickSort = async (start, end) => {
