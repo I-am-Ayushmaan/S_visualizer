@@ -62,7 +62,7 @@ const Visualizer = () => {
 
   return (
     <> 
-    <Box md={4}>
+    <Box mb={4}>
      <Header/>
       <VStack width={"100%"} alignItems={"stretch"}>
         <Sidebar
